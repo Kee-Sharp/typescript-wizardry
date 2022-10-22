@@ -1,0 +1,14 @@
+{
+  "name": "typescript-wizardry",
+  "version": "1.0.0",
+  "description": "Collection of type helpers and problems",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kee-Sharp",
+  "license": "ISC",
+  "dependencies": {
+    "@type-challenges/utils": "^0.1.1"
+  }
+}
