@@ -1,7 +1,7 @@
 {
   "name": "typescript-wizardry",
   "version": "1.0.0",
-  "description": "Collection of type helpers and problems",
+  "description": "Collection of type helpers and algorithms",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

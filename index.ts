@@ -1,4 +1,4 @@
-// Some examples of the solvers in this repo
+// Some examples of the algorithms in this repo
 
 import { Equal as BaseEqual, Expect } from '@type-challenges/utils';
 import { StringifyArray } from './helpers/array';
