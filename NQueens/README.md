@@ -1,6 +1,7 @@
 # N Queens
 
-### Given a positive integer **N**, this type can list out all the possible solutions to placing **N** queens on an **NxN** chessboard so that none of the queens are attacking each other. There are two output formats.
+## Description
+Given a positive integer **N**, this type can list out all the possible solutions to placing **N** queens on an **NxN** chessboard so that none of the queens are attacking each other. There are two output formats.
 
 ## N Queens Output Formats
 1. The *NQueens* type returns a tuple of all of the possible board representations with a 'board' being a 2d tuple where `'_'` is a free space and `'Q'` is a queen

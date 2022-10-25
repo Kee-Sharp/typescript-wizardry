@@ -1,6 +1,7 @@
 # Merge sort
 
-### Given a tuple of literal number types, this type can sort the tuple into ascending or descending order.
+## Description
+Given a tuple of literal number types, this type can sort the tuple into ascending or descending order.
 
 
 ## Sorting Example
