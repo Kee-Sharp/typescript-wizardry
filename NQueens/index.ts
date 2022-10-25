@@ -1,6 +1,6 @@
-import { IndexOf, Filter, Replace, Slice } from "./helpers/array";
-import { Tuple, Length } from "./helpers/common";
-import { Add, Sub } from "./helpers/numbers";
+import { IndexOf, Filter, Replace, Slice } from "../helpers/array";
+import { Tuple, Length } from "../helpers/common";
+import { Add, Sub } from "../helpers/numbers";
 
 type Space = '_' | 'Q';
 type AnyBoard = Space[][];
@@ -24,7 +24,7 @@ type AllQueenPos<
   ? AllQueenPos<Rest, [...Pos, [Length<Pos>, QueenPos<FirstRow>]]>
   : Filter<Pos, [number, -1]>;
 
-  type IsSameColumn<A extends Coord, B extends Coord> = A[1] extends B[1] ? true : false;
+type IsSameColumn<A extends Coord, B extends Coord> = A[1] extends B[1] ? true : false;
 
 type IsSameDiagonal<A extends Coord, B extends Coord> = Add<A[0], A[1]> extends Add<B[0], B[1]>
   ? true
@@ -98,4 +98,4 @@ type BoardToPos<
 export type BoardsToPos<Boards extends AnyBoard[]> =
   Boards extends [infer FirstBoard extends AnyBoard, ...infer OtherBoards extends AnyBoard[]]
   ? [BoardToPos<FirstBoard>, ...BoardsToPos<OtherBoards>]
-  : []
+  : [];

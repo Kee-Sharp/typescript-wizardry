@@ -1,6 +1,6 @@
-import { IsAtLeastLength, SplitArr, Tail } from "./helpers/array";
-import { Length } from "./helpers/common";
-import { Add, NGreaterThanM } from "./helpers/numbers";
+import { IsAtLeastLength, SplitArr, Tail } from "../helpers/array";
+import { Length } from "../helpers/common";
+import { Add, NGreaterThanM } from "../helpers/numbers";
 
 // Combines two already sorted arrays, controlled by the Ascending parameter
 type MergeHalves<
