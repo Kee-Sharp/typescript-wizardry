@@ -42,18 +42,18 @@ type StartPos<
   ? StartPos<Maze, [...Counter, any]>
   : [Length<Counter>, StartPosCurrentRow];
 
-/** Returns wheter P is within Maze */
+/** Returns whether P is within Maze */
 type IsValidPos<Maze extends AnyMaze, P extends Pos> = IsNegative<P[0]> extends true
   ? false
   : IsNegative<P[1]> extends true
-  ? false
-  : P[0] extends Indices<Maze>
-  ? P[1] extends Indices<Maze[0]>
-    ? Maze[P[0]][P[1]] extends FreeSpace
-      ? true
-      : false
-    : false
-  : false;
+    ? false
+    : P[0] extends Indices<Maze>
+      ? P[1] extends Indices<Maze[0]>
+        ? Maze[P[0]][P[1]] extends FreeSpace
+          ? true
+          : false
+        : false
+      : false;
 
 /** A wrapper around Add to account for the -1 from the vectors */
 type AddWithNegative<N extends number, M extends number> = M extends -1
@@ -66,10 +66,8 @@ type AddDirectionToPosition<
   P extends Pos,
   D extends Direction,
   Vector extends Pos = DirectionToVector[D]
-> = [
-  AddWithNegative<P[0], Vector[0]>,
-  AddWithNegative<P[1], Vector[1]>
-] extends infer NewPosition extends Pos
+> =
+[AddWithNegative<P[0], Vector[0]>, AddWithNegative<P[1], Vector[1]>] extends infer NewPosition extends Pos
   ? IsValidPos<Maze, NewPosition> extends true
     ? NewPosition
     : "invalid"
@@ -80,41 +78,25 @@ type Successors<
   Maze extends AnyMaze,
   Current extends State,
   DirectionsToAdd = Directions
-> = DirectionsToAdd extends [
-  infer FirstDirection extends Direction,
-  ...infer OtherDirections extends Direction[]
-]
-  ? AddDirectionToPosition<
-      Maze,
-      Current[0],
-      FirstDirection
-    > extends infer NewPosition extends Pos
-    ? [
-        [NewPosition, [...Current[1], FirstDirection]],
-        ...Successors<Maze, Current, OtherDirections>
-      ]
+> =
+DirectionsToAdd extends [infer FirstDirection extends Direction, ...infer OtherDirections extends Direction[]]
+  ? AddDirectionToPosition<Maze, Current[0], FirstDirection> extends infer NewPosition extends Pos
+    ? [[NewPosition, [...Current[1], FirstDirection]], ...Successors<Maze, Current, OtherDirections>]
     : Successors<Maze, Current, OtherDirections>
   : [];
 
-// main algorithm
 type MazeHelper<
   Maze extends AnyMaze,
   OpenList extends State[] = [],
   Visited extends Pos[] = []
-> = OpenList extends [
-  infer CurrentState extends State,
-  ...infer OtherOpenStates extends State[]
-]
+> =
+OpenList extends [infer CurrentState extends State, ...infer OtherOpenStates extends State[]]
   ? CurrentState extends [infer CurrentPos extends Pos, infer CurrentPath]
     ? Maze[CurrentPos[0]][CurrentPos[1]] extends Goal
       ? CurrentPath
       : CurrentPos extends Visited[number]
-      ? MazeHelper<Maze, OtherOpenStates, Visited>
-      : MazeHelper<
-          Maze,
-          [...OtherOpenStates, ...Successors<Maze, CurrentState>],
-          [...Visited, CurrentPos]
-        >
+        ? MazeHelper<Maze, OtherOpenStates, Visited>
+        : MazeHelper<Maze, [...OtherOpenStates, ...Successors<Maze, CurrentState>], [...Visited, CurrentPos]>
     : "should not get here, branching to assign variables"
   : "no possible path";
 export type MazeSolver<Maze extends AnyMaze> = IsValidMaze<Maze> extends true
