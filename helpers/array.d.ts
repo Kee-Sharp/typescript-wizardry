@@ -1,5 +1,6 @@
-import { Length, StringToNumber } from "./common";
+import { Length } from "./common";
 import { Sub } from "./numbers";
+import { StringToNumber } from "./string";
 
 export type Tail<Arr extends any[]> = Arr extends [any, ...infer U] ? U : [];
 
