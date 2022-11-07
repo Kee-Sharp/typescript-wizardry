@@ -1,7 +1,7 @@
 // Some examples of the algorithms in this repo
 
 import { Equal as BaseEqual, Expect } from '@type-challenges/utils';
-import { EquationSolver } from './EquationSolver';
+import { ExpressionSolver } from './ExpressionSolver';
 import { StringifyArray } from './helpers/array';
 import { Length } from './helpers/common';
 import { MazeSolver } from './MazeSolver';
@@ -76,11 +76,11 @@ type Ascending = MergeSort<Nums>;
 type Descending = MergeSort<Nums, false>;
 //   ^?
 
-/** Equation Solver */
+/** Expression Solver */
 
-type EquationCases = [
-  Expect<Equal<EquationSolver<'3+4'>, 7>>,
-  Expect<Equal<EquationSolver<'1+2*3/4-5'>, -3>>,
-  Expect<Equal<EquationSolver<'2*(3+87)/4*9-32*5+6'>, 251>>,
-  Expect<Equal<EquationSolver<'5&6'>, 'unrecognized operator &'>>,
+type ExpressionCases = [
+  Expect<Equal<ExpressionSolver<'3+4'>, 7>>,
+  Expect<Equal<ExpressionSolver<'1+2*3/4-5'>, -3>>,
+  Expect<Equal<ExpressionSolver<'2*(3+87)/4*9-32*5+6'>, 251>>,
+  Expect<Equal<ExpressionSolver<'5&6'>, 'unrecognized operator &'>>,
 ];

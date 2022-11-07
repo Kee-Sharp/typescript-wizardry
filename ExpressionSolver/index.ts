@@ -12,16 +12,16 @@ type OperatorToPrecedence = {
 type Operator = keyof OperatorToPrecedence;
 type NonParenthesis = Exclude<Operator, '('>;
 
-type ParseEquation<
+type ParseExpression<
   E extends string,
   Ret extends TokenType[] = [],
   Previous extends string | null = null
 > = E extends `${infer First extends string}${infer Rest extends string}`
   ? StringToNumber<First> extends never
     ? Previous extends string
-      ? ParseEquation<Rest, [...Ret, StringToNumber<Previous>, First]>
-      : ParseEquation<Rest, [...Ret, First]>
-    : ParseEquation<Rest, Ret, `${Previous extends string ? Previous : ''}${First}`>
+      ? ParseExpression<Rest, [...Ret, StringToNumber<Previous>, First]>
+      : ParseExpression<Rest, [...Ret, First]>
+    : ParseExpression<Rest, Ret, `${Previous extends string ? Previous : ''}${First}`>
   : Previous extends string
     ? [...Ret, StringToNumber<Previous>]
     : Ret;
@@ -68,4 +68,4 @@ type RPNParsing<Tokens extends TokenType[], S extends number[] = []> =
         : `unrecognized operator ${FirstToken}`
     : S[0];
 
-export type EquationSolver<E extends string> = RPNParsing<ShuntingYard<ParseEquation<E>>>;
+export type ExpressionSolver<E extends string> = RPNParsing<ShuntingYard<ParseExpression<E>>>;
